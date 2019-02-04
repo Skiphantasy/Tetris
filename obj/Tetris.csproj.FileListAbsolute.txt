@@ -1,0 +1,10 @@
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\bin\Debug\Tetris.exe.config
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\obj\Debug\Tetris.exe
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\obj\Debug\Tetris.pdb
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\bin\Debug\Tetris.exe
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\bin\Debug\Tetris.pdb
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\obj\Debug\ResolveAssemblyReference.cache
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\obj\Debug\Tetris.AcerdaDe.resources
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\obj\Debug\Tetris.frmGUI.resources
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\obj\Debug\Tetris.Properties.Resources.resources
+C:\DVDNet\Ejemplos\Ejemplos C#\Tetris\obj\Debug\Tetris.csproj.GenerateResource.Cache

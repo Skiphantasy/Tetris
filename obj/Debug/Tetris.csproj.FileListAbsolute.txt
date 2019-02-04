@@ -1,0 +1,36 @@
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\bin\Debug\Tetris.exe.config
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\obj\Debug\Tetris.exe
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\obj\Debug\Tetris.pdb
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\bin\Debug\Tetris.exe
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\bin\Debug\Tetris.pdb
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\obj\Debug\Tetris.AcerdaDe.resources
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\obj\Debug\Tetris.frmGUI.resources
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\obj\Debug\Tetris.Properties.Resources.resources
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\obj\Debug\Tetris.csproj.GenerateResource.Cache
+F:\JuanVicente Copia Aula42\Ejemplos C#\Tetris\obj\Debug\Tetris.csprojResolveAssemblyReference.cache
+C:\Users\administrador\Desktop\Ejemplos C#\Tetris\bin\Debug\Tetris.exe.config
+C:\Users\administrador\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.exe
+C:\Users\administrador\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.pdb
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\bin\Debug\Tetris.exe.config
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\bin\Debug\Tetris.exe
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\bin\Debug\Tetris.pdb
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.csprojResolveAssemblyReference.cache
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.AcerdaDe.resources
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.frmGUI.resources
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.Properties.Resources.resources
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.csproj.GenerateResource.Cache
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cache
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.exe
+C:\Users\JUAN VICENTE\Desktop\Ejemplos C#\Tetris\obj\Debug\Tetris.pdb
+C:\Users\Tania\source\repos\Tetris\bin\Debug\Tetris.exe.config
+C:\Users\Tania\source\repos\Tetris\bin\Debug\Tetris.exe
+C:\Users\Tania\source\repos\Tetris\bin\Debug\Tetris.pdb
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.csprojAssemblyReference.cache
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.AcerdaDe.resources
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.frmGUI.resources
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.Properties.Resources.resources
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.csproj.GenerateResource.cache
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cache
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.exe
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.pdb
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.frmRowsColumns.resources

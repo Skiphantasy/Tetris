@@ -1,0 +1,10 @@
+bin\Debug\Tetris.exe.config
+bin\Debug\Tetris.exe
+bin\Debug\Tetris.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Tetris.AcerdaDe.resources
+obj\Debug\Tetris.frmGUI.resources
+obj\Debug\Tetris.csproj.GenerateResource.Cache
+obj\Debug\Tetris.exe
+obj\Debug\Tetris.pdb
+obj\Debug\Tetris.Properties.Resources.resources
