@@ -1,3 +1,12 @@
+/*
+ * EXERCISE............: Exercise 11.
+ * NAME AND LASTNAME...: Tania López Martín 
+ * CURSE AND GROUP ....: 2º Interface Development 
+ * TITLE ..............: Tetris
+ * DEADLINE............: 05 Feb 2019
+ */
+
+
 using System;
 using System.Windows.Forms;
 
@@ -16,10 +25,17 @@ namespace Tetris
 			}
 			else
 			{
-				frmGUI f = new frmGUI();
-				f.ShowDialog();
-				f.Dispose();
-			}
+                frmSplashScreen splash;
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                splash = new frmSplashScreen();
+
+                if (splash.ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new frmGUI());
+                }
+            }
 		}
 	}
 }

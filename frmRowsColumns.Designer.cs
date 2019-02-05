@@ -1,4 +1,13 @@
-﻿namespace Tetris
+﻿/*
+ * EXERCISE............: Exercise 11.
+ * NAME AND LASTNAME...: Tania López Martín 
+ * CURSE AND GROUP ....: 2º Interface Development 
+ * TITLE ..............: Tetris
+ * DEADLINE............: 05 Feb 2019
+ */
+
+
+namespace Tetris
 {
     partial class frmRowsColumns
     {

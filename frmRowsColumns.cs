@@ -14,6 +14,7 @@ namespace Tetris
         {
             InitializeComponent();
             txtColumnas.Text = Constantes.columnasPantalla.ToString();
+            CenterToParent();
             txtFilas.Text = Constantes.filasPantalla.ToString();
         }
 
@@ -22,11 +23,11 @@ namespace Tetris
             Constantes.columnasPantalla = int.Parse(txtColumnas.Text);
             Constantes.filasPantalla = int.Parse(txtFilas.Text);
             MessageBox.Show("Se han guardado los cambios");
-            frmGUI.T = new Tetris();
             frmGUI.Width1 = Constantes.columnasPantalla * 20;
             frmGUI.Height1 = Constantes.filasPantalla * 20;
-            frmGUI.Picbox.Size = new System.Drawing.Size(frmGUI.Width1, frmGUI.Height1);
             Close();
+            /*frmGUI.T = new Tetris();
+            frmGUI.Picbox.Size = new System.Drawing.Size(frmGUI.Width1, frmGUI.Height1);*/
         }
 
         private void btnCalcelar_Click(object sender, EventArgs e)

@@ -1,3 +1,12 @@
+/*
+ * EXERCISE............: Exercise 11.
+ * NAME AND LASTNAME...: Tania López Martín 
+ * CURSE AND GROUP ....: 2º Interface Development 
+ * TITLE ..............: Tetris
+ * DEADLINE............: 05 Feb 2019
+ */
+
+
 using System;
 
 namespace Tetris
@@ -240,7 +249,7 @@ namespace Tetris
             m_matrizPiezas[9] = new Pieza(formaPieza1, formaPieza2, formaPieza3, formaPieza4, 9);
 
             r = new Random(unchecked((int)DateTime.Now.Ticks));
-			nuevoJuego();
+			//nuevoJuego();
 		}
 		#endregion
 
@@ -317,7 +326,7 @@ namespace Tetris
 					m_juegoTerminado = true;
 				}
 				m_piezaSiguiente = nuevaPieza();
-				m_puntuacion = m_puntuacion + 4;
+				m_puntuacion += 4;
 				m_numLineas += compruebaLineasCompletas();
 			}
 			if (!m_juegoTerminado)

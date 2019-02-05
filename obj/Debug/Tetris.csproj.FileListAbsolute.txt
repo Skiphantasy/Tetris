@@ -34,3 +34,8 @@ C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.csproj.CoreCompileInputs.cac
 C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.exe
 C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.pdb
 C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.frmRowsColumns.resources
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.frmEnterName.resources
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.frmRanking.resources
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.csproj.CopyComplete
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.frmAbout.resources
+C:\Users\Tania\source\repos\Tetris\obj\Debug\Tetris.frmSplashScreen.resources

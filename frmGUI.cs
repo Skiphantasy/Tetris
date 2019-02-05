@@ -1,124 +1,141 @@
+/*
+ * EXERCISE............: Exercise 11.
+ * NAME AND LASTNAME...: Tania López Martín 
+ * CURSE AND GROUP ....: 2º Interface Development 
+ * TITLE ..............: Tetris
+ * DEADLINE............: 05 Feb 2019
+ */
+
+
 using System;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
+using Db4objects.Db4o;
+using System.Collections.Generic;
+//using FormUtilities;
 
 namespace Tetris
 {
-	/// <summary>
-	/// Descripción breve de Form1.
-	/// </summary>
-	public class frmGUI : System.Windows.Forms.Form
-	{
-		private System.Windows.Forms.PictureBox pbPantallaJuego;
-		private System.Windows.Forms.Timer timer1;
-		private System.ComponentModel.IContainer components;
-		public static Tetris t;
-		private bool haciaAbajo;
-		private bool haciaDerecha;
-		private bool rotaDerecha;
-		private bool rotaIzquierda;
-		private bool enPausa;
-		private Timer timer2;
-		private Label lblNumLineas;
-		private Label lblNivel;
-		private Label label2;
-		private Label label1;
-		private MainMenu mainMenu1;
-		private MenuItem mnuJuego;
-		private MenuItem mnuAyuda;
-		private MenuItem mnuNuevo;
-		private MenuItem mnuSalir;
-		private MenuItem mnuAcerca;
-		private Label label3;
-		private PictureBox pbPiezaSiguiente;
-		private MenuItem mnuPausa;
+    /// <summary>
+    /// Descripción breve de Form1.
+    /// </summary>
+    public class frmGUI : Form
+    {
+        private System.Windows.Forms.PictureBox pbPantallaJuego;
+        private System.Windows.Forms.Timer timer1;
+        private System.ComponentModel.IContainer components;
+        private Tetris t;
+        private bool haciaAbajo;
+        private bool haciaDerecha;
+        private bool rotaDerecha;
+        private bool rotaIzquierda;
+        private bool enPausa;
+        private static int puntuacionLograda = 0;
+        private Timer timer2;
+        private Label lblNumLineas;
+        private Label lblNivel;
+        private Label lblNiv;
+        private Label lblLinea;
+        private MainMenu mainMenu1;
+        private MenuItem menuItem1;
+        private MenuItem mnuAyuda;
+        private MenuItem menuItem3;
+        private MenuItem menuItem4;
+        private MenuItem mnuAcerca;
+        private Label lblProxima;
+        private bool started = false;
+        private PictureBox pbPiezaSiguiente;
+        private MenuItem menuItem6;
         private ToolTip toolTip1;
-        private static int height, width;
         private MenuItem mnuRanking;
-        private MenuItem mnuVerRanking;
-        private MenuItem mnuOpciones;
-        private MenuItem mnuFilasColumnas;
+        private MenuItem mnuVer;
+        private Label lblPun;
+        private Label lblPuntuacion;
         private bool haciaIzquierda;
-        private static PictureBox picbox;
+        private static int height, width;
+        private static Puntuacion[] maxPuntuaciones = new Puntuacion[5];
+        private static List<Puntuacion> punts;
 
-        public static Tetris T { get => t; set => t = value; }
         public static int Height1 { get => height; set => height = value; }
         public static int Width1 { get => width; set => width = value; }
-        public static PictureBox Picbox { get => picbox; set => picbox = value; }
+        internal static Puntuacion[] MaxPuntuaciones { get => maxPuntuaciones; set => maxPuntuaciones = value; }
+        public static int PuntuacionLograda { get => puntuacionLograda; set => puntuacionLograda = value; }
+        internal static List<Puntuacion> Punts { get => punts; set => punts = value; }
 
         public frmGUI()
-		{
+        {
             //
             // Necesario para admitir el Diseñador de Windows Forms
             //
-            this.pbPantallaJuego = new PictureBox();
-            picbox = pbPantallaJuego;
-            width = Constantes.columnasPantalla * 20;
-            height = Constantes.filasPantalla * 20; 
             InitializeComponent();
-			//
-			// TODO: agregar código de constructor después de llamar a InitializeComponent
-			//
-		}
+            punts = new List<Puntuacion>();
+            //Options.CreateRegKey(@"SOFTWARE\P11", "Uses");
 
-		/// <summary>
-		/// Limpiar los recursos que se estén utilizando.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+            //
+            // TODO: agregar código de constructor después de llamar a InitializeComponent
+            //
+        }
 
-		#region Código generado por el Diseñador de Windows Forms
-		/// <summary>
-		/// Método necesario para admitir el Diseñador. No se puede modificar
-		/// el contenido del método con el editor de código.
-		/// </summary>
-		private void InitializeComponent()
-		{
-            this.components = new Container();
-            this.timer1 = new Timer(this.components);
-            this.timer2 = new Timer(this.components);
-            this.lblNumLineas = new Label();
-            this.lblNivel = new Label();
-            this.label2 = new Label();
-            this.label1 = new Label();
-            this.mainMenu1 = new MainMenu(this.components);
-            this.mnuJuego = new MenuItem();
-            this.mnuNuevo = new MenuItem();
-            this.mnuPausa = new MenuItem();
-            this.mnuSalir = new MenuItem();
-            this.mnuOpciones = new MenuItem();
-            this.mnuFilasColumnas = new MenuItem();
-            this.mnuRanking = new MenuItem();
-            this.mnuVerRanking = new MenuItem();
-            this.mnuAyuda = new MenuItem();
-            this.mnuAcerca = new MenuItem();
-            this.pbPiezaSiguiente = new PictureBox();
-            this.label3 = new Label();
-            this.toolTip1 = new ToolTip(this.components);
-            ((ISupportInitialize)(picbox)).BeginInit();
-            ((ISupportInitialize)(this.pbPiezaSiguiente)).BeginInit();
+        /// <summary>
+        /// Limpiar los recursos que se estén utilizando.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Código generado por el Diseñador de Windows Forms
+        /// <summary>
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido del método con el editor de código.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGUI));
+            this.pbPantallaJuego = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.lblNumLineas = new System.Windows.Forms.Label();
+            this.lblNivel = new System.Windows.Forms.Label();
+            this.lblNiv = new System.Windows.Forms.Label();
+            this.lblLinea = new System.Windows.Forms.Label();
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.mnuRanking = new System.Windows.Forms.MenuItem();
+            this.mnuVer = new System.Windows.Forms.MenuItem();
+            this.mnuAyuda = new System.Windows.Forms.MenuItem();
+            this.mnuAcerca = new System.Windows.Forms.MenuItem();
+            this.pbPiezaSiguiente = new System.Windows.Forms.PictureBox();
+            this.lblProxima = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblPuntuacion = new System.Windows.Forms.Label();
+            this.lblPun = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPantallaJuego)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPiezaSiguiente)).BeginInit();
             this.SuspendLayout();
             // 
             // pbPantallaJuego
             // 
-            picbox.BackColor = System.Drawing.Color.Black;
-            picbox.Location = new System.Drawing.Point(136, 24);
-            picbox.Name = "pbPantallaJuego";
-            picbox.Size = new System.Drawing.Size(width, height);
-            picbox.TabIndex = 0;
-            picbox.TabStop = false;
+            this.pbPantallaJuego.BackColor = System.Drawing.Color.Black;
+            this.pbPantallaJuego.Location = new System.Drawing.Point(136, 24);
+            this.pbPantallaJuego.Name = "pbPantallaJuego";
+            this.pbPantallaJuego.Size = new System.Drawing.Size(260, 420);
+            this.pbPantallaJuego.TabIndex = 0;
+            this.pbPantallaJuego.TabStop = false;
             // 
             // timer1
             // 
@@ -152,87 +169,74 @@ namespace Tetris
             this.lblNivel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.lblNivel, "Para mi Alumno ");
             // 
-            // label2
+            // lblNiv
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 192);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 16);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Nivel:";
+            this.lblNiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNiv.Location = new System.Drawing.Point(16, 192);
+            this.lblNiv.Name = "lblNiv";
+            this.lblNiv.Size = new System.Drawing.Size(40, 16);
+            this.lblNiv.TabIndex = 4;
+            this.lblNiv.Text = "Nivel:";
             // 
-            // label1
+            // lblLinea
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 136);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 16);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Lineas:";
+            this.lblLinea.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinea.Location = new System.Drawing.Point(16, 136);
+            this.lblLinea.Name = "lblLinea";
+            this.lblLinea.Size = new System.Drawing.Size(52, 16);
+            this.lblLinea.TabIndex = 5;
+            this.lblLinea.Text = "Líneas:";
             // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.mnuJuego,
-            this.mnuOpciones,
+            this.menuItem1,
             this.mnuRanking,
             this.mnuAyuda});
             // 
-            // mnuJuego
+            // menuItem1
             // 
-            this.mnuJuego.Index = 0;
-            this.mnuJuego.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.mnuNuevo,
-            this.mnuPausa,
-            this.mnuSalir});
-            this.mnuJuego.Text = "Juego";
+            this.menuItem1.Index = 0;
+            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem3,
+            this.menuItem6,
+            this.menuItem4});
+            this.menuItem1.Text = "Juego";
             // 
-            // mnuNuevo
+            // menuItem3
             // 
-            this.mnuNuevo.Index = 0;
-            this.mnuNuevo.Text = "Nuevo";
-            this.mnuNuevo.Click += new System.EventHandler(this.menuItem3_Click);
+            this.menuItem3.Index = 0;
+            this.menuItem3.Text = "Nuevo";
+            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
-            // mnuPausa
+            // menuItem6
             // 
-            this.mnuPausa.Index = 1;
-            this.mnuPausa.Text = "Pausa";
-            this.mnuPausa.Click += new System.EventHandler(this.menuItem6_Click);
+            this.menuItem6.Index = 1;
+            this.menuItem6.Text = "Pausa";
+            this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
             // 
-            // mnuSalir
+            // menuItem4
             // 
-            this.mnuSalir.Index = 2;
-            this.mnuSalir.Text = "Salir";
-            this.mnuSalir.Click += new System.EventHandler(this.menuItem4_Click);
-            // 
-            // mnuOpciones
-            // 
-            this.mnuOpciones.Index = 1;
-            this.mnuOpciones.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.mnuFilasColumnas});
-            this.mnuOpciones.Text = "Opciones";
-            // 
-            // mnuFilasColumnas
-            // 
-            this.mnuFilasColumnas.Index = 0;
-            this.mnuFilasColumnas.Text = "Modificar Filas/Columnas";
-            this.mnuFilasColumnas.Click += new System.EventHandler(this.mnuFilasColumnas_Click);
+            this.menuItem4.Index = 2;
+            this.menuItem4.Text = "Salir";
+            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
             // 
             // mnuRanking
             // 
-            this.mnuRanking.Index = 2;
+            this.mnuRanking.Index = 1;
             this.mnuRanking.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.mnuVerRanking});
+            this.mnuVer});
             this.mnuRanking.Text = "Ranking";
             // 
-            // mnuVerRanking
+            // mnuVer
             // 
-            this.mnuVerRanking.Index = 0;
-            this.mnuVerRanking.Text = "Ver Ranking";
+            this.mnuVer.Index = 0;
+            this.mnuVer.Text = "Ver Ranking";
+            this.mnuVer.Click += new System.EventHandler(this.mnuVer_Click);
             // 
             // mnuAyuda
             // 
-            this.mnuAyuda.Index = 3;
+            this.mnuAyuda.Index = 2;
             this.mnuAyuda.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuAcerca});
             this.mnuAyuda.Text = "Ayuda";
@@ -251,53 +255,99 @@ namespace Tetris
             this.pbPiezaSiguiente.Size = new System.Drawing.Size(80, 80);
             this.pbPiezaSiguiente.TabIndex = 7;
             this.pbPiezaSiguiente.TabStop = false;
+            this.pbPiezaSiguiente.Click += new System.EventHandler(this.pbPiezaSiguiente_Click);
             // 
-            // label3
+            // lblProxima
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(16, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Próxima pieza:";
+            this.lblProxima.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProxima.Location = new System.Drawing.Point(16, 24);
+            this.lblProxima.Name = "lblProxima";
+            this.lblProxima.Size = new System.Drawing.Size(88, 16);
+            this.lblProxima.TabIndex = 8;
+            this.lblProxima.Text = "Próxima pieza:";
+            // 
+            // lblPuntuacion
+            // 
+            this.lblPuntuacion.BackColor = System.Drawing.Color.Black;
+            this.lblPuntuacion.ForeColor = System.Drawing.Color.White;
+            this.lblPuntuacion.Location = new System.Drawing.Point(16, 267);
+            this.lblPuntuacion.Name = "lblPuntuacion";
+            this.lblPuntuacion.Size = new System.Drawing.Size(100, 23);
+            this.lblPuntuacion.TabIndex = 9;
+            this.lblPuntuacion.Text = "0";
+            this.lblPuntuacion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.lblPuntuacion, "Para mi Alumno ");
+            // 
+            // lblPun
+            // 
+            this.lblPun.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPun.Location = new System.Drawing.Point(16, 251);
+            this.lblPun.Name = "lblPun";
+            this.lblPun.Size = new System.Drawing.Size(80, 16);
+            this.lblPun.TabIndex = 10;
+            this.lblPun.Text = "Puntuación:";
             // 
             // frmGUI
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(416, 473);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblPun);
+            this.Controls.Add(this.lblPuntuacion);
+            this.Controls.Add(this.lblProxima);
             this.Controls.Add(this.pbPiezaSiguiente);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblLinea);
+            this.Controls.Add(this.lblNiv);
             this.Controls.Add(this.lblNivel);
             this.Controls.Add(this.lblNumLineas);
             this.Controls.Add(this.pbPantallaJuego);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu1;
             this.Name = "frmGUI";
             this.Text = "eTetris";
             this.Load += new System.EventHandler(this.frmGUI_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGUI_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmGUI_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(picbox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPantallaJuego)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPiezaSiguiente)).EndInit();
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		/// <summary>
-		/// Punto de entrada principal de la aplicación.
-		/// </summary>
-		[STAThread]
+        /// <summary>
+        /// Punto de entrada principal de la aplicación.
+        /// </summary>
+        [STAThread]
         //static void Main() 
         //{
         //    Application.Run(new frmGUI());
         //}
 
-		private void frmGUI_Load(object sender, System.EventArgs e)
-		{
+        private void frmGUI_Load(object sender, System.EventArgs e)
+        {
             t = new Tetris();
-		}
+            using (IObjectContainer db = Db4oFactory.OpenFile("score.data"))
+            {
+
+                IObjectSet result = db.QueryByExample(new Puntuacion(null, 0));
+
+                if(result.HasNext())
+                {
+                    while (result.HasNext())
+                    {
+                        Puntuacion puntActual = (Puntuacion)result.Next();
+                        Console.WriteLine(puntActual.Nombre + " - " + puntActual.Puntos);
+                        punts.Add(puntActual);                   
+                    }
+                }
+
+                punts.Sort();
+                punts.Reverse();
+                db.Commit();
+                db.Close();
+            }
+        }
+
 
 		private void frmGUI_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
@@ -435,7 +485,9 @@ namespace Tetris
 			if (t.numLineas < Constantes.NUM_LINEAS_POR_NIVEL)
 			{
 				lblNumLineas.Text = t.numLineas.ToString();
-				if (haciaAbajo)
+                lblPuntuacion.Text = t.puntuacion.ToString();
+                puntuacionLograda = t.puntuacion;
+                if (haciaAbajo)
 					actualizaPantalla();
 				else
 				{
@@ -448,6 +500,8 @@ namespace Tetris
 				{
 					timer1.Stop();
 					MessageBox.Show("Se terminó el juego");
+                    Form form = new frmEnterName();
+                    form.ShowDialog();
 				}
 			}
 		}
@@ -473,6 +527,7 @@ namespace Tetris
 			}
 			if (t.juegoTerminado)
 			{
+                started = false;
 				timer2.Stop();
 			}
 		}
@@ -516,7 +571,12 @@ namespace Tetris
 
 		private void nuevoJuego()
 		{
-			inicializaTeclas();
+            started = true;
+            pbPantallaJuego.Size = new System.Drawing.Size(width, height);
+            int w = width + 173;
+            int h = height + 113;
+            Size = new Size(w, h);
+            inicializaTeclas();
 			t.nuevoJuego();
 			timer1.Interval = Constantes.NIVELES(t.nivel);
 			pintaPantalla(t.matrizPantalla);
@@ -546,18 +606,37 @@ namespace Tetris
 
 		private void menuItem3_Click(object sender, System.EventArgs e)
 		{
+            Form form = new frmRowsColumns();
+            form.ShowDialog();
 			nuevoJuego();
 		}
 
 		private void menuItem5_Click(object sender, System.EventArgs e)
 		{
-			enPausa = false;
-			pausaJuego();
-			AcerdaDe a = new AcerdaDe();
-			a.ShowDialog();
-			a.Dispose();
-			enPausa = true;
-			pausaJuego();
+            if (!t.juegoTerminado && !started)
+            {
+                enPausa = false;
+                pausaJuego();
+                Form a = new frmAbout();
+                a.ShowDialog();
+                a.Dispose();
+               // enPausa = true;
+                //pausaJuego();
+            } else if(!t.juegoTerminado && started)
+            {
+                enPausa = false;
+                pausaJuego();
+                Form a = new frmAbout();
+                a.ShowDialog();
+                a.Dispose();
+                enPausa = true;
+                pausaJuego();
+            }
+            else if (t.juegoTerminado)
+            {
+                Form a = new frmAbout();
+                a.ShowDialog();
+            }
 		}
 
 		private void menuItem6_Click(object sender, System.EventArgs e)
@@ -565,10 +644,15 @@ namespace Tetris
 			pausaJuego();
 		}
 
-        private void mnuFilasColumnas_Click(object sender, EventArgs e)
+        private void mnuVer_Click(object sender, EventArgs e)
         {
-            Form form = new frmRowsColumns();
+            Form form = new frmRanking();            
             form.ShowDialog();
         }
-    }
+
+        private void pbPiezaSiguiente_Click(object sender, EventArgs e)
+        {
+
+        }
+	}
 }
